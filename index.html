@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daily Orbit — Circular Calendar</title>
+<meta name="description" content="A friendly, animated neumorphic circular calendar and clock dashboard." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌤️</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient drifting background -->
+  <div class="aurora" aria-hidden="true">
+    <span class="blob blob-a"></span>
+    <span class="blob blob-b"></span>
+    <span class="blob blob-c"></span>
+  </div>
+
+  <div class="app">
+
+    <header class="topbar reveal" style="--delay:0ms">
+      <div class="greeting">
+        <p class="eyebrow">Today's Orbit</p>
+        <h1 id="greetingText">Hello there</h1>
+      </div>
+      <div class="live-date-chip" id="liveDate">—</div>
+    </header>
+
+    <main class="dashboard">
+
+      <!-- HERO: the circular calendar wheel -->
+      <section class="wheel-card reveal" style="--delay:80ms" aria-label="Circular calendar showing today's day, month and weekday">
+        <div class="wheel-stage" id="wheelStage">
+          <svg id="wheelSvg" viewBox="0 0 480 480" class="wheel-svg" aria-hidden="true"></svg>
+
+          <div class="center-clock" id="centerClock" role="button" tabindex="0" aria-label="Tap for a little celebration">
+            <div class="dial-face">
+              <div class="hand hour-hand" id="hourHand"></div>
+              <div class="hand minute-hand" id="minuteHand"></div>
+              <div class="hand second-hand" id="secondHand"></div>
+              <div class="dial-center-dot"></div>
+            </div>
+            <div class="digital-time" id="digitalTime">00:00:00 AM</div>
+            <div class="tap-hint">tap me ✨</div>
+          </div>
+
+          <div class="particles" id="particles" aria-hidden="true"></div>
+        </div>
+
+        <div class="ring-legend">
+          <span class="legend-chip"><i class="dot dot-weekday"></i>Weekday</span>
+          <span class="legend-chip"><i class="dot dot-month"></i>Month</span>
+          <span class="legend-chip"><i class="dot dot-day"></i>Day</span>
+        </div>
+      </section>
+
+      <!-- SIDE CARDS -->
+      <aside class="side-cards">
+
+        <article class="card weather-card reveal" style="--delay:160ms">
+          <div class="card-icon-wrap">
+            <span class="card-icon" id="weatherIcon">☀️</span>
+          </div>
+          <div class="card-body">
+            <p class="card-label">Weather now <span class="tag">demo</span></p>
+            <h2 class="card-value" id="weatherTemp">24°C</h2>
+            <p class="card-sub" id="weatherDesc">Clear &amp; bright</p>
+          </div>
+        </article>
+
+        <article class="card steps-card reveal" style="--delay:220ms">
+          <div class="card-icon-wrap">
+            <span class="card-icon">🚶</span>
+          </div>
+          <div class="card-body">
+            <p class="card-label">Steps today <span class="tag">demo</span></p>
+            <h2 class="card-value"><span id="stepsCount">0</span></h2>
+            <div class="progress-track">
+              <div class="progress-fill" id="stepsFill"></div>
+            </div>
+            <p class="card-sub" id="stepsGoal">Goal: 10,000 steps</p>
+          </div>
+        </article>
+
+        <article class="card quote-card reveal" id="quoteCard" style="--delay:280ms" role="button" tabindex="0" aria-label="Tap for another daily spark">
+          <p class="card-label">Today's spark ✨ <span class="tag">tap</span></p>
+          <p class="quote-text" id="quoteText">Loading something nice…</p>
+        </article>
+
+      </aside>
+    </main>
+
+    <footer class="footer reveal" style="--delay:340ms">
+      <p>Built with a little neumorphism &amp; a lot of good vibes 🌤️</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
