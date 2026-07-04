@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Orbit — Premium Circular Calendar</title>
+  <meta name="description" content="A premium glassmorphism and neumorphism circular calendar, clock, and day dashboard built with HTML, CSS, and JavaScript." />
+  <meta name="theme-color" content="#eaf0fb" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◌</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">Skip to dashboard</a>
+
+  <div class="scene" aria-hidden="true">
+    <span class="orb orb-one"></span>
+    <span class="orb orb-two"></span>
+    <span class="orb orb-three"></span>
+    <span class="mesh mesh-one"></span>
+    <span class="mesh mesh-two"></span>
+  </div>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <header class="topbar reveal" style="--delay: 0ms">
+      <a class="brand" href="#" aria-label="Daily Orbit home">
+        <span class="brand-mark">◌</span>
+        <span>
+          <strong>Daily Orbit</strong>
+          <small>Premium day dashboard</small>
+        </span>
+      </a>
+
+      <div class="topbar-actions">
+        <div class="live-chip" id="liveDate" aria-live="polite">—</div>
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Switch to dark mode">
+          <span class="sun">☀</span>
+          <span class="moon">☾</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="mainContent" class="dashboard" tabindex="-1">
+      <section class="hero-panel glass-panel reveal" style="--delay: 70ms" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <p class="eyebrow">Today’s orbit</p>
+          <h1 id="heroTitle"><span id="greetingText">Hello</span>, your day is in motion.</h1>
+          <p class="hero-subtitle">A softer calendar interface with layered glass, tactile neumorphism, live clock motion, and focused micro-interactions.</p>
+        </div>
+
+        <div class="hero-metrics" aria-label="Daily quick metrics">
+          <article class="metric-card">
+            <span class="metric-label">Day progress</span>
+            <strong id="dayProgress">0%</strong>
+            <small id="dayProgressHint">Calculating daylight rhythm</small>
+          </article>
+          <article class="metric-card accent-card">
+            <span class="metric-label">Current focus</span>
+            <strong id="focusModeLabel">Calm</strong>
+            <small>Tap a mode below</small>
+          </article>
+        </div>
+      </section>
+
+      <section class="orbit-card premium-card reveal" style="--delay: 120ms" aria-label="Circular calendar and live analog clock">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Calendar wheel</p>
+            <h2>Month, weekday, and day in one premium dial</h2>
+          </div>
+          <span class="status-pill"><i></i> Live</span>
+        </div>
+
+        <div class="wheel-stage" id="wheelStage">
+          <div class="ring-backdrop" aria-hidden="true"></div>
+          <svg id="wheelSvg" class="wheel-svg" viewBox="0 0 520 520" role="img" aria-labelledby="wheelTitle wheelDesc">
+            <title id="wheelTitle">Circular calendar wheel</title>
+            <desc id="wheelDesc">The wheel highlights the current weekday, month, and day of the month.</desc>
+          </svg>
+
+          <button class="center-clock" id="centerClock" type="button" aria-label="Tap for a premium particle burst">
+            <span class="dial-face" aria-hidden="true">
+              <span class="dial-ridge"></span>
+              <span class="hand hour-hand" id="hourHand"></span>
+              <span class="hand minute-hand" id="minuteHand"></span>
+              <span class="hand second-hand" id="secondHand"></span>
+              <span class="dial-center-dot"></span>
+            </span>
+            <span class="digital-time" id="digitalTime">00:00:00 AM</span>
+            <span class="tap-hint">tap for sparkle</span>
+          </button>
+
+          <div class="particles" id="particles" aria-hidden="true"></div>
+        </div>
+
+        <div class="ring-legend" aria-label="Calendar ring legend">
+          <span><i class="dot dot-day"></i>Day</span>
+          <span><i class="dot dot-month"></i>Month</span>
+          <span><i class="dot dot-weekday"></i>Weekday</span>
+        </div>
+      </section>
+
+      <aside class="side-stack" aria-label="Daily widgets">
+        <article class="widget-card weather-card premium-card reveal" style="--delay: 170ms">
+          <div class="widget-icon" id="weatherIcon" aria-hidden="true">☀️</div>
+          <div>
+            <p class="card-label">Weather mood <span class="tag">demo</span></p>
+            <h3 id="weatherTemp">24°C</h3>
+            <p id="weatherDesc">Clear & bright</p>
+          </div>
+        </article>
+
+        <article class="widget-card steps-card premium-card reveal" style="--delay: 220ms">
+          <div class="widget-icon" aria-hidden="true">⌁</div>
+          <div class="widget-main">
+            <p class="card-label">Momentum <span class="tag">demo</span></p>
+            <h3><span id="stepsCount">0</span> steps</h3>
+            <div class="progress-track" aria-hidden="true">
+              <span class="progress-fill" id="stepsFill"></span>
+            </div>
+            <p id="stepsGoal">Goal: 10,000 steps</p>
+          </div>
+        </article>
+
+        <article class="premium-card focus-card reveal" style="--delay: 270ms">
+          <div class="section-heading compact">
+            <div>
+              <p class="card-label">Focus modes</p>
+              <h3>Set the dashboard tone</h3>
+            </div>
+          </div>
+          <div class="mode-grid" role="group" aria-label="Focus modes">
+            <button class="mode-button is-active" type="button" data-mode="Calm" data-tone="Breathe slowly. Keep the interface soft and quiet.">Calm</button>
+            <button class="mode-button" type="button" data-mode="Deep Work" data-tone="Reduce noise. Start with the highest-leverage task.">Deep Work</button>
+            <button class="mode-button" type="button" data-mode="Move" data-tone="Stand up, reset posture, and move for two minutes.">Move</button>
+          </div>
+          <p class="focus-note" id="focusNote">Breathe slowly. Keep the interface soft and quiet.</p>
+        </article>
+
+        <article class="quote-card premium-card reveal" id="quoteCard" style="--delay: 320ms">
+          <button class="quote-button" type="button" id="quoteButton" aria-label="Show another daily spark">
+            <span class="card-label">Daily spark <span class="tag">tap</span></span>
+            <span class="quote-text" id="quoteText">Loading a focused thought…</span>
+          </button>
+        </article>
+      </aside>
+    </main>
+
+    <footer class="footer reveal" style="--delay: 360ms">
+      <p>Pure HTML, CSS, and JavaScript. No framework, no build step.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
